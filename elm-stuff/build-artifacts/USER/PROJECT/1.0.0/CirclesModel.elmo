@@ -1,0 +1,92 @@
+Elm.CirclesModel = Elm.CirclesModel || {};
+Elm.CirclesModel.make = function (_elm) {
+   "use strict";
+   _elm.CirclesModel = _elm.CirclesModel || {};
+   if (_elm.CirclesModel.values)
+   return _elm.CirclesModel.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "CirclesModel",
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Random = Elm.Random.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Time = Elm.Time.make(_elm);
+   var makeCircle = function (time) {
+      return function () {
+         var seed1 = $Random.initialSeed($Basics.round(time));
+         var $ = A2($Random.generate,
+         A2($Random.$int,10,50),
+         seed1),
+         radius = $._0,
+         seed2 = $._1;
+         var $ = A2($Random.generate,
+         A2($Random.$int,10,50),
+         seed2),
+         xv = $._0,
+         seed3 = $._1;
+         var $ = A2($Random.generate,
+         A2($Random.$int,10,50),
+         seed3),
+         yv = $._0,
+         seed4 = $._1;
+         var $ = A2($Random.generate,
+         A2($Random.$int,10,220),
+         seed4),
+         r = $._0,
+         seed5 = $._1;
+         var $ = A2($Random.generate,
+         A2($Random.$int,10,220),
+         seed5),
+         g = $._0,
+         seed6 = $._1;
+         var _ = A2($Random.generate,
+         A2($Random.$int,10,220),
+         seed6);
+         var b = function () {
+            switch (_.ctor)
+            {case "_Tuple2": return _._0;}
+            _U.badCase($moduleName,
+            "on line 30, column 16 to 43");
+         }();
+         return {_: {}
+                ,col: A3($Color.rgb,r,g,b)
+                ,creationTime: time
+                ,radius: radius
+                ,xv: xv
+                ,yv: yv};
+      }();
+   };
+   var Circle = F2(function (a,b) {
+      return {_: {}
+             ,circleSpec: b
+             ,position: a};
+   });
+   var CircleSpec = F5(function (a,
+   b,
+   c,
+   d,
+   e) {
+      return {_: {}
+             ,col: d
+             ,creationTime: e
+             ,radius: a
+             ,xv: b
+             ,yv: c};
+   });
+   var Position = F2(function (a,
+   b) {
+      return {_: {},x: a,y: b};
+   });
+   _elm.CirclesModel.values = {_op: _op
+                              ,Position: Position
+                              ,CircleSpec: CircleSpec
+                              ,Circle: Circle
+                              ,makeCircle: makeCircle};
+   return _elm.CirclesModel.values;
+};

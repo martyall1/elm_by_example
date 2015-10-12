@@ -1,0 +1,87 @@
+Elm.DelayedMousePositions = Elm.DelayedMousePositions || {};
+Elm.DelayedMousePositions.make = function (_elm) {
+   "use strict";
+   _elm.DelayedMousePositions = _elm.DelayedMousePositions || {};
+   if (_elm.DelayedMousePositions.values)
+   return _elm.DelayedMousePositions.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "DelayedMousePositions",
+   $Basics = Elm.Basics.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Time = Elm.Time.make(_elm),
+   $Window = Elm.Window.make(_elm);
+   var combine = A2($List.foldr,
+   $Signal.map2(F2(function (x,y) {
+      return A2($List._op["::"],
+      x,
+      y);
+   })),
+   $Signal.constant(_L.fromArray([])));
+   var delayedMousePositions = function (rs) {
+      return function () {
+         var n = $List.length(rs);
+         var adjust = F2(function (_v0,
+         _v1) {
+            return function () {
+               switch (_v1.ctor)
+               {case "_Tuple2":
+                  return function () {
+                       switch (_v0.ctor)
+                       {case "_Tuple2":
+                          return {ctor: "_Tuple2"
+                                 ,_0: (_v1._0 - _v0._0) / 2 | 0
+                                 ,_1: (_v0._1 / 2 | 0) - _v1._1};}
+                       _U.badCase($moduleName,
+                       "on line 18, column 29 to 45");
+                    }();}
+               _U.badCase($moduleName,
+               "on line 18, column 29 to 45");
+            }();
+         });
+         var position = A2($Signal._op["~"],
+         A2($Signal._op["<~"],
+         adjust,
+         $Window.dimensions),
+         $Mouse.position);
+         var positions = A2($List.repeat,
+         n,
+         position);
+         var delayedPositions = A3($List.map2,
+         F2(function (r,pos) {
+            return function () {
+               var delayedPosition = A2($Time.delay,
+               $Basics.toFloat(r) * 100,
+               pos);
+               return A2($Signal._op["<~"],
+               function (pos) {
+                  return {ctor: "_Tuple2"
+                         ,_0: r
+                         ,_1: pos};
+               },
+               delayedPosition);
+            }();
+         }),
+         rs,
+         positions);
+         return combine(delayedPositions);
+      }();
+   };
+   var main = A2($Signal._op["<~"],
+   $Graphics$Element.show,
+   delayedMousePositions(_L.fromArray([0
+                                      ,10
+                                      ,25])));
+   _elm.DelayedMousePositions.values = {_op: _op
+                                       ,combine: combine
+                                       ,delayedMousePositions: delayedMousePositions
+                                       ,main: main};
+   return _elm.DelayedMousePositions.values;
+};

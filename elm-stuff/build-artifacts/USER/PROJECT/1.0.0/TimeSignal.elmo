@@ -1,0 +1,73 @@
+Elm.TimeSignal = Elm.TimeSignal || {};
+Elm.TimeSignal.make = function (_elm) {
+   "use strict";
+   _elm.TimeSignal = _elm.TimeSignal || {};
+   if (_elm.TimeSignal.values)
+   return _elm.TimeSignal.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "TimeSignal",
+   $Basics = Elm.Basics.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm),
+   $Time = Elm.Time.make(_elm);
+   var showsignals = F6(function (a,
+   b,
+   c,
+   d,
+   e,
+   f) {
+      return $Graphics$Element.flow($Graphics$Element.down)(A2($List.map,
+      function ($) {
+         return $Graphics$Element.leftAligned($Text.fromString($));
+      },
+      _L.fromArray([A2($Basics._op["++"],
+                   "every (5*second): ",
+                   $Basics.toString(a))
+                   ,A2($Basics._op["++"],
+                   "every (2*second) Mouse.clicks: ",
+                   $Basics.toString(b))
+                   ,A2($Basics._op["++"],
+                   "timestamp Mouse.isDown: ",
+                   $Basics.toString(c))
+                   ,A2($Basics._op["++"],
+                   "delay second Mouse.position: ",
+                   $Basics.toString(d))
+                   ,A2($Basics._op["++"],
+                   "fps 200: ",
+                   $Basics.toString(e))
+                   ,A2($Basics._op["++"],
+                   "fpsWhen 200 Mouse.isDown: ",
+                   $Basics.toString(f))])));
+   });
+   var main = A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["<~"],
+   showsignals,
+   $Time.every(5 * $Time.second)),
+   A2($Time.since,
+   2 * $Time.second,
+   $Mouse.clicks)),
+   $Time.timestamp($Mouse.isDown)),
+   A2($Time.delay,
+   $Time.second,
+   $Mouse.position)),
+   $Time.fps(200)),
+   A2($Time.fpsWhen,
+   200,
+   $Mouse.isDown));
+   _elm.TimeSignal.values = {_op: _op
+                            ,showsignals: showsignals
+                            ,main: main};
+   return _elm.TimeSignal.values;
+};

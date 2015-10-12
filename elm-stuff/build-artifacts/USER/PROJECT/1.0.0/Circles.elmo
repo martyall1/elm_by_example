@@ -1,0 +1,177 @@
+Elm.Circles = Elm.Circles || {};
+Elm.Circles.make = function (_elm) {
+   "use strict";
+   _elm.Circles = _elm.Circles || {};
+   if (_elm.Circles.values)
+   return _elm.Circles.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Circles",
+   $Basics = Elm.Basics.make(_elm),
+   $CirclesModel = Elm.CirclesModel.make(_elm),
+   $CirclesView = Elm.CirclesView.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Time = Elm.Time.make(_elm);
+   var computeCoordinate = F4(function (startingPointCoordinate,
+   boxSize,
+   velocity,
+   time) {
+      return function () {
+         var distance = startingPointCoordinate + $Basics.round(velocity * time / 1000);
+         var distanceMod = A2($Basics._op["%"],
+         distance,
+         boxSize);
+         var distanceDiv = distance / boxSize | 0;
+         return _U.eq(A2($Basics._op["%"],
+         distanceDiv,
+         2),
+         0) ? distanceMod : boxSize - distanceMod;
+      }();
+   });
+   var positionedCircle = F4(function (w,
+   h,
+   time,
+   circle) {
+      return function () {
+         var $ = circle,
+         position = $.position,
+         circleSpec = $.circleSpec;
+         var $ = circleSpec,
+         radius = $.radius,
+         xv = $.xv,
+         yv = $.yv,
+         creationTime = $.creationTime;
+         var relativeTime = time - creationTime;
+         var boxSizeX = w - radius * 2;
+         var boxSizeY = h - radius * 2;
+         var x = radius + A4(computeCoordinate,
+         position.x - radius,
+         boxSizeX,
+         $Basics.toFloat(xv),
+         relativeTime);
+         var y = radius + A4(computeCoordinate,
+         position.y - radius,
+         boxSizeY,
+         $Basics.toFloat(yv),
+         relativeTime);
+         return {_: {}
+                ,circleSpec: circleSpec
+                ,position: {_: {},x: x,y: y}};
+      }();
+   });
+   var positionedCircles = F4(function (w,
+   h,
+   time,
+   circles) {
+      return A2($List.map,
+      A3(positionedCircle,w,h,time),
+      circles);
+   });
+   var clickPositionsSignal = A2($Signal.sampleOn,
+   $Mouse.clicks,
+   $Mouse.position);
+   var inBoxClickPositionsSignal = F2(function (w,
+   h) {
+      return function () {
+         var positionInBox = function (pos) {
+            return _U.cmp($Basics.fst(pos),
+            w) < 1 && _U.cmp($Basics.snd(pos),
+            h) < 1;
+         };
+         return A3($Signal.filter,
+         positionInBox,
+         {ctor: "_Tuple2",_0: 0,_1: 0},
+         clickPositionsSignal);
+      }();
+   });
+   var clockSignal = A2($Signal._op["<~"],
+   $Basics.fst,
+   $Time.timestamp($Time.fps(50)));
+   var creationTimeSignal = F2(function (w,
+   h) {
+      return A2($Signal.sampleOn,
+      A2(inBoxClickPositionsSignal,
+      w,
+      h),
+      clockSignal);
+   });
+   var newCircleSpecSignal = F2(function (w,
+   h) {
+      return A2($Signal._op["<~"],
+      $CirclesModel.makeCircle,
+      A2(creationTimeSignal,w,h));
+   });
+   var newCircleSignal = F2(function (w,
+   h) {
+      return function () {
+         var makeCircle = F2(function (_v0,
+         spec) {
+            return function () {
+               switch (_v0.ctor)
+               {case "_Tuple2": return {_: {}
+                                       ,circleSpec: spec
+                                       ,position: {_: {}
+                                                  ,x: _v0._0
+                                                  ,y: _v0._1}};}
+               _U.badCase($moduleName,
+               "on line 32, column 31 to 81");
+            }();
+         });
+         return A2($Signal._op["~"],
+         A2($Signal._op["<~"],
+         makeCircle,
+         A2(inBoxClickPositionsSignal,
+         w,
+         h)),
+         A2(newCircleSpecSignal,w,h));
+      }();
+   });
+   var allCirclesSpecSignal = F2(function (w,
+   h) {
+      return A3($Signal.foldp,
+      F2(function (x,y) {
+         return A2($List._op["::"],
+         x,
+         y);
+      }),
+      _L.fromArray([]),
+      A2(newCircleSignal,w,h));
+   });
+   var circlesSignal = F2(function (w,
+   h) {
+      return A2($Signal._op["~"],
+      A2($Signal._op["<~"],
+      A2(positionedCircles,w,h),
+      clockSignal),
+      A2(allCirclesSpecSignal,w,h));
+   });
+   var main = function () {
+      var main$ = F2(function (w,
+      h) {
+         return A2($Signal._op["<~"],
+         A2($CirclesView.view,w,h),
+         A2(circlesSignal,w,h));
+      });
+      return A2(main$,1000,1000);
+   }();
+   _elm.Circles.values = {_op: _op
+                         ,clockSignal: clockSignal
+                         ,clickPositionsSignal: clickPositionsSignal
+                         ,inBoxClickPositionsSignal: inBoxClickPositionsSignal
+                         ,creationTimeSignal: creationTimeSignal
+                         ,newCircleSpecSignal: newCircleSpecSignal
+                         ,newCircleSignal: newCircleSignal
+                         ,allCirclesSpecSignal: allCirclesSpecSignal
+                         ,computeCoordinate: computeCoordinate
+                         ,positionedCircle: positionedCircle
+                         ,positionedCircles: positionedCircles
+                         ,circlesSignal: circlesSignal
+                         ,main: main};
+   return _elm.Circles.values;
+};

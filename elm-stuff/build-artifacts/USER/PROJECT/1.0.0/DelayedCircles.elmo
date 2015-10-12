@@ -1,0 +1,34 @@
+Elm.DelayedCircles = Elm.DelayedCircles || {};
+Elm.DelayedCircles.make = function (_elm) {
+   "use strict";
+   _elm.DelayedCircles = _elm.DelayedCircles || {};
+   if (_elm.DelayedCircles.values)
+   return _elm.DelayedCircles.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "DelayedCircles",
+   $Basics = Elm.Basics.make(_elm),
+   $DelayedMousePositions = Elm.DelayedMousePositions.make(_elm),
+   $DrawCircles = Elm.DrawCircles.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Window = Elm.Window.make(_elm);
+   var main = A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["<~"],
+   $DrawCircles.drawCircles,
+   $DelayedMousePositions.delayedMousePositions(_L.fromArray([5
+                                                             ,8
+                                                             ,13
+                                                             ,21
+                                                             ,24]))),
+   $Signal.constant($DrawCircles.ts)),
+   $Window.dimensions);
+   _elm.DelayedCircles.values = {_op: _op
+                                ,main: main};
+   return _elm.DelayedCircles.values;
+};

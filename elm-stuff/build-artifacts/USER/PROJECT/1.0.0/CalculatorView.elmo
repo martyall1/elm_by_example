@@ -1,0 +1,49 @@
+Elm.CalculatorView = Elm.CalculatorView || {};
+Elm.CalculatorView.make = function (_elm) {
+   "use strict";
+   _elm.CalculatorView = _elm.CalculatorView || {};
+   if (_elm.CalculatorView.values)
+   return _elm.CalculatorView.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "CalculatorView",
+   $Basics = Elm.Basics.make(_elm),
+   $CalculatorModel = Elm.CalculatorModel.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm);
+   var makeButton = F2(function (label,
+   size) {
+      return function () {
+         var buttonColor = A3($Color.rgb,
+         199,
+         235,
+         234);
+         var xSize = $CalculatorModel.buttonSize(size);
+         return A3($Graphics$Collage.collage,
+         xSize,
+         60,
+         _L.fromArray([$Graphics$Collage.filled(buttonColor)(A2($Graphics$Collage.rect,
+                      $Basics.toFloat(xSize - 8),
+                      52))
+                      ,$Graphics$Collage.outlined(_U.replace([["width"
+                                                              ,2]
+                                                             ,["cap"
+                                                              ,$Graphics$Collage.Padded]],
+                      $Graphics$Collage.defaultLine))(A2($Graphics$Collage.rect,
+                      $Basics.toFloat(xSize - 8),
+                      52))
+                      ,$Graphics$Collage.toForm($Graphics$Element.centered($Text.bold($Text.height(30)($Text.fromString(label)))))]));
+      }();
+   });
+   _elm.CalculatorView.values = {_op: _op
+                                ,makeButton: makeButton};
+   return _elm.CalculatorView.values;
+};

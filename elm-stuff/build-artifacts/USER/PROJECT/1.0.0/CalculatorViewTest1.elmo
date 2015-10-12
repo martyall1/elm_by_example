@@ -1,0 +1,25 @@
+Elm.CalculatorViewTest1 = Elm.CalculatorViewTest1 || {};
+Elm.CalculatorViewTest1.make = function (_elm) {
+   "use strict";
+   _elm.CalculatorViewTest1 = _elm.CalculatorViewTest1 || {};
+   if (_elm.CalculatorViewTest1.values)
+   return _elm.CalculatorViewTest1.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "CalculatorViewTest1",
+   $Basics = Elm.Basics.make(_elm),
+   $CalculatorModel = Elm.CalculatorModel.make(_elm),
+   $CalculatorView = Elm.CalculatorView.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var main = A2($CalculatorView.makeButton,
+   "test",
+   $CalculatorModel.Large);
+   _elm.CalculatorViewTest1.values = {_op: _op
+                                     ,main: main};
+   return _elm.CalculatorViewTest1.values;
+};

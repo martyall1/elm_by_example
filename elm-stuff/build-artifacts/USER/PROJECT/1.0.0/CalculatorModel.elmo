@@ -1,0 +1,120 @@
+Elm.CalculatorModel = Elm.CalculatorModel || {};
+Elm.CalculatorModel.make = function (_elm) {
+   "use strict";
+   _elm.CalculatorModel = _elm.CalculatorModel || {};
+   if (_elm.CalculatorModel.values)
+   return _elm.CalculatorModel.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "CalculatorModel",
+   $Basics = Elm.Basics.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Set = Elm.Set.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $String = Elm.String.make(_elm);
+   var showState = function (_v0) {
+      return function () {
+         return _U.eq(_v0.input,
+         "") ? $Basics.toString(_v0.number) : _v0.input;
+      }();
+   };
+   var calculate = F3(function (number,
+   op,
+   input) {
+      return function () {
+         var number2 = function () {
+            var _v2 = $String.toFloat(input);
+            switch (_v2.ctor)
+            {case "Err": return 0.0;
+               case "Ok": return _v2._0;}
+            _U.badCase($moduleName,
+            "between lines 55 and 58");
+         }();
+         return _U.eq(op,
+         "+") ? number + number2 : _U.eq(op,
+         "-") ? number - number2 : _U.eq(op,
+         "*") ? number * number2 : _U.eq(op,
+         "/") ? number / number2 : number2;
+      }();
+   });
+   var initialState = {_: {}
+                      ,input: ""
+                      ,number: 0.0
+                      ,operator: ""};
+   var isOper = function (btn) {
+      return A2($Set.member,
+      btn,
+      $Set.fromList(_L.fromArray(["+"
+                                 ,"-"
+                                 ,"*"
+                                 ,"/"
+                                 ,"="])));
+   };
+   var step = F2(function (btn,
+   state) {
+      return _U.eq(btn,
+      "C") ? initialState : _U.eq(btn,
+      "CE") ? _U.replace([["input"
+                          ,"0"]],
+      state) : _U.eq(state.input,
+      "") && isOper(btn) ? _U.replace([["operator"
+                                       ,btn]],
+      state) : isOper(btn) ? {_: {}
+                             ,input: ""
+                             ,number: A3(calculate,
+                             state.number,
+                             state.operator,
+                             state.input)
+                             ,operator: btn} : _U.replace([["input"
+                                                           ,(_U.eq(state.input,
+                                                           "") || _U.eq(state.input,
+                                                           "0")) && _U.eq(btn,
+                                                           ".") ? "0." : _U.eq(state.input,
+                                                           "") || _U.eq(state.input,
+                                                           "0") ? btn : _U.cmp($String.length(state.input),
+                                                           18) > -1 ? state.input : _U.eq(btn,
+                                                           ".") && A2($String.any,
+                                                           function (c) {
+                                                              return _U.eq(c,
+                                                              _U.chr("."));
+                                                           },
+                                                           state.input) ? state.input : A2($Basics._op["++"],
+                                                           state.input,
+                                                           btn)]],
+      state);
+   });
+   var CalculatorState = F3(function (a,
+   b,
+   c) {
+      return {_: {}
+             ,input: a
+             ,number: c
+             ,operator: b};
+   });
+   var buttonSize = function (size) {
+      return function () {
+         switch (size.ctor)
+         {case "Large": return 120;
+            case "Regular": return 60;}
+         _U.badCase($moduleName,
+         "between lines 12 and 14");
+      }();
+   };
+   var Large = {ctor: "Large"};
+   var Regular = {ctor: "Regular"};
+   _elm.CalculatorModel.values = {_op: _op
+                                 ,Regular: Regular
+                                 ,Large: Large
+                                 ,buttonSize: buttonSize
+                                 ,CalculatorState: CalculatorState
+                                 ,isOper: isOper
+                                 ,initialState: initialState
+                                 ,step: step
+                                 ,calculate: calculate
+                                 ,showState: showState};
+   return _elm.CalculatorModel.values;
+};

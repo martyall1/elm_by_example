@@ -1,0 +1,73 @@
+Elm.CirclesView = Elm.CirclesView || {};
+Elm.CirclesView.make = function (_elm) {
+   "use strict";
+   _elm.CirclesView = _elm.CirclesView || {};
+   if (_elm.CirclesView.values)
+   return _elm.CirclesView.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "CirclesView",
+   $Basics = Elm.Basics.make(_elm),
+   $CirclesModel = Elm.CirclesModel.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var drawCircle = F3(function (w,
+   h,
+   c) {
+      return function () {
+         var $ = c,
+         position = $.position,
+         circleSpec = $.circleSpec;
+         return $Graphics$Collage.move({ctor: "_Tuple2"
+                                       ,_0: $Basics.toFloat(position.x) - $Basics.toFloat(w) / 2
+                                       ,_1: $Basics.toFloat(h) / 2 - $Basics.toFloat(position.y)})(A2($Graphics$Collage.filled,
+         circleSpec.col,
+         $Graphics$Collage.circle($Basics.toFloat(circleSpec.radius))));
+      }();
+   });
+   var drawCircles = F3(function (w,
+   h,
+   circs) {
+      return A2($Graphics$Collage.collage,
+      w,
+      h)(A2($List.map,
+      A2(drawCircle,w,h),
+      circs));
+   });
+   var boundingBox = F2(function (w,
+   h) {
+      return A3($Graphics$Collage.collage,
+      w,
+      h,
+      _L.fromArray([$Graphics$Collage.outlined($Graphics$Collage.solid($Color.black))(A2($Graphics$Collage.rect,
+                   $Basics.toFloat(w),
+                   $Basics.toFloat(h)))
+                   ,$Graphics$Collage.outlined($Graphics$Collage.solid($Color.red))(A2($Graphics$Collage.rect,
+                   $Basics.toFloat(w - 2),
+                   $Basics.toFloat(h - 2)))]));
+   });
+   var view = F3(function (w,
+   h,
+   circs) {
+      return $Graphics$Element.layers(_L.fromArray([A2(boundingBox,
+                                                   w,
+                                                   h)
+                                                   ,A3(drawCircles,
+                                                   w,
+                                                   h,
+                                                   circs)]));
+   });
+   _elm.CirclesView.values = {_op: _op
+                             ,boundingBox: boundingBox
+                             ,drawCircle: drawCircle
+                             ,drawCircles: drawCircles
+                             ,view: view};
+   return _elm.CirclesView.values;
+};
