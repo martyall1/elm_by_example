@@ -1,0 +1,24 @@
+Elm.HelloWorld2 = Elm.HelloWorld2 || {};
+Elm.HelloWorld2.make = function (_elm) {
+   "use strict";
+   _elm.HelloWorld2 = _elm.HelloWorld2 || {};
+   if (_elm.HelloWorld2.values)
+   return _elm.HelloWorld2.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "HelloWorld2",
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm);
+   var main = $Graphics$Element.leftAligned($Text.height(60)($Text.bold($Text.italic($Text.color($Color.blue)($Text.fromString("Hello World"))))));
+   _elm.HelloWorld2.values = {_op: _op
+                             ,main: main};
+   return _elm.HelloWorld2.values;
+};

@@ -1,0 +1,88 @@
+Elm.EyesView = Elm.EyesView || {};
+Elm.EyesView.make = function (_elm) {
+   "use strict";
+   _elm.EyesView = _elm.EyesView || {};
+   if (_elm.EyesView.values)
+   return _elm.EyesView.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "EyesView",
+   $Basics = Elm.Basics.make(_elm),
+   $Color = Elm.Color.make(_elm),
+   $Graphics$Collage = Elm.Graphics.Collage.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var eyePupil = F2(function (w,
+   h) {
+      return $Graphics$Collage.filled($Color.black)(A2($Graphics$Collage.oval,
+      w,
+      h));
+   });
+   var eyeBorder = F2(function (w,
+   h) {
+      return $Graphics$Collage.group(_L.fromArray([$Graphics$Collage.filled($Color.black)(A2($Graphics$Collage.oval,
+                                                  w,
+                                                  h))
+                                                  ,$Graphics$Collage.filled($Color.white)(A2($Graphics$Collage.oval,
+                                                  w * 9 / 10,
+                                                  h * 9 / 10))]));
+   });
+   var eyesView = F2(function (_v0,
+   _v1) {
+      return function () {
+         switch (_v1.ctor)
+         {case "_Tuple4":
+            return function () {
+                 switch (_v0.ctor)
+                 {case "_Tuple2":
+                    return function () {
+                         var yC = $Basics.toFloat(_v0._1) / 2;
+                         var xC = $Basics.toFloat(_v0._0) / 4;
+                         return A3($Graphics$Collage.collage,
+                         _v0._0,
+                         _v0._1,
+                         _L.fromArray([$Graphics$Collage.moveX(0 - xC)(A2(eyeBorder,
+                                      2 * xC,
+                                      2 * yC))
+                                      ,$Graphics$Collage.moveX(xC)(A2(eyeBorder,
+                                      2 * xC,
+                                      2 * yC))
+                                      ,$Graphics$Collage.move({ctor: "_Tuple2"
+                                                              ,_0: _v1._0
+                                                              ,_1: _v1._1})(A2(eyePupil,
+                                      xC / 5,
+                                      yC / 5))
+                                      ,$Graphics$Collage.move({ctor: "_Tuple2"
+                                                              ,_0: _v1._2
+                                                              ,_1: _v1._3})(A2(eyePupil,
+                                      xC / 5,
+                                      yC / 5))]));
+                      }();}
+                 _U.badCase($moduleName,
+                 "between lines 25 and 33");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 25 and 33");
+      }();
+   });
+   var main = A2(eyesView,
+   {ctor: "_Tuple2"
+   ,_0: 700
+   ,_1: 500},
+   {ctor: "_Tuple4"
+   ,_0: -50
+   ,_1: -50
+   ,_2: 100
+   ,_3: 100});
+   _elm.EyesView.values = {_op: _op
+                          ,eyeBorder: eyeBorder
+                          ,eyePupil: eyePupil
+                          ,eyesView: eyesView
+                          ,main: main};
+   return _elm.EyesView.values;
+};

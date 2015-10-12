@@ -1,0 +1,55 @@
+Elm.Eyes = Elm.Eyes || {};
+Elm.Eyes.make = function (_elm) {
+   "use strict";
+   _elm.Eyes = _elm.Eyes || {};
+   if (_elm.Eyes.values)
+   return _elm.Eyes.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Eyes",
+   $Basics = Elm.Basics.make(_elm),
+   $EyesModel = Elm.EyesModel.make(_elm),
+   $EyesView = Elm.EyesView.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Window = Elm.Window.make(_elm);
+   var eyes = F2(function (_v0,
+   _v1) {
+      return function () {
+         switch (_v1.ctor)
+         {case "_Tuple2":
+            return function () {
+                 switch (_v0.ctor)
+                 {case "_Tuple2":
+                    return A2($EyesView.eyesView,
+                      {ctor: "_Tuple2"
+                      ,_0: _v0._0
+                      ,_1: _v0._1},
+                      A2($EyesModel.pupilsCoordinates,
+                      {ctor: "_Tuple2"
+                      ,_0: _v0._0
+                      ,_1: _v0._1},
+                      {ctor: "_Tuple2"
+                      ,_0: _v1._0
+                      ,_1: _v1._1}));}
+                 _U.badCase($moduleName,
+                 "on line 11, column 20 to 64");
+              }();}
+         _U.badCase($moduleName,
+         "on line 11, column 20 to 64");
+      }();
+   });
+   var main = A3($Signal.map2,
+   eyes,
+   $Window.dimensions,
+   $Mouse.position);
+   _elm.Eyes.values = {_op: _op
+                      ,main: main
+                      ,eyes: eyes};
+   return _elm.Eyes.values;
+};

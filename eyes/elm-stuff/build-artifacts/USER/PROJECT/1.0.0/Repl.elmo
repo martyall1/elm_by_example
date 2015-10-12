@@ -1,0 +1,33 @@
+Elm.Repl = Elm.Repl || {};
+Elm.Repl.make = function (_elm) {
+   "use strict";
+   _elm.Repl = _elm.Repl || {};
+   if (_elm.Repl.values)
+   return _elm.Repl.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Repl",
+   $Basics = Elm.Basics.make(_elm),
+   $EyesModel = Elm.EyesModel.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var tsol = {ctor: "_Tuple0"};
+   var deltron3030 = A3($EyesModel.calculateP,
+   {ctor: "_Tuple2"
+   ,_0: 200
+   ,_1: 100},
+   {ctor: "_Tuple2"
+   ,_0: 500
+   ,_1: 100},
+   {ctor: "_Tuple2"
+   ,_0: 10
+   ,_1: 10});
+   _elm.Repl.values = {_op: _op
+                      ,deltron3030: deltron3030
+                      ,tsol: tsol};
+   return _elm.Repl.values;
+};

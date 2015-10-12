@@ -1,0 +1,51 @@
+Elm.Fibonacci = Elm.Fibonacci || {};
+Elm.Fibonacci.make = function (_elm) {
+   "use strict";
+   _elm.Fibonacci = _elm.Fibonacci || {};
+   if (_elm.Fibonacci.values)
+   return _elm.Fibonacci.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "Fibonacci",
+   $Basics = Elm.Basics.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var fibonacci = function (n) {
+      return function () {
+         var fibonnaci$ = F4(function (n,
+         k1,
+         k2,
+         acc) {
+            return _U.cmp(n,
+            0) < 1 ? acc : A4(fibonnaci$,
+            n - 1,
+            k2,
+            k1 + k2,
+            A2($List._op["::"],k2,acc));
+         });
+         return $List.reverse(A4(fibonnaci$,
+         n,
+         0,
+         1,
+         _L.fromArray([])));
+      }();
+   };
+   var fibonacciWithIndices = function (n) {
+      return A3($List.map2,
+      F2(function (v0,v1) {
+         return {ctor: "_Tuple2"
+                ,_0: v0
+                ,_1: v1};
+      }),
+      _L.range(0,n),
+      fibonacci(n));
+   };
+   _elm.Fibonacci.values = {_op: _op
+                           ,fibonacci: fibonacci
+                           ,fibonacciWithIndices: fibonacciWithIndices};
+   return _elm.Fibonacci.values;
+};

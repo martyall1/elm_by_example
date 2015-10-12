@@ -1,0 +1,76 @@
+Elm.MouseSignals = Elm.MouseSignals || {};
+Elm.MouseSignals.make = function (_elm) {
+   "use strict";
+   _elm.MouseSignals = _elm.MouseSignals || {};
+   if (_elm.MouseSignals.values)
+   return _elm.MouseSignals.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "MouseSignals",
+   $Basics = Elm.Basics.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Mouse = Elm.Mouse.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm);
+   var showSignals = F7(function (a,
+   b,
+   c,
+   d,
+   e,
+   f,
+   g) {
+      return $Graphics$Element.flow($Graphics$Element.down)(A2($List.map,
+      function ($) {
+         return $Graphics$Element.leftAligned($Text.fromString($));
+      },
+      _L.fromArray([A2($Basics._op["++"],
+                   "Mouse.position: ",
+                   $Basics.toString(a))
+                   ,A2($Basics._op["++"],
+                   "Mouse.x: ",
+                   $Basics.toString(b))
+                   ,A2($Basics._op["++"],
+                   "Mouse.y: ",
+                   $Basics.toString(c))
+                   ,A2($Basics._op["++"],
+                   "Mouse.clicks: ",
+                   $Basics.toString(d))
+                   ,A2($Basics._op["++"],
+                   "Mouse.isDown: ",
+                   $Basics.toString(e))
+                   ,A2($Basics._op["++"],
+                   "sampleOn Mouse.clicks Mouse.position: ",
+                   $Basics.toString(f))
+                   ,A2($Basics._op["++"],
+                   "sampleOn Mouse.isDown Mouse.position: ",
+                   $Basics.toString(g))])));
+   });
+   var main = A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["<~"],
+   showSignals,
+   $Mouse.position),
+   $Mouse.x),
+   $Mouse.y),
+   $Mouse.clicks),
+   $Mouse.isDown),
+   A2($Signal.sampleOn,
+   $Mouse.clicks,
+   $Mouse.position)),
+   A2($Signal.sampleOn,
+   $Mouse.isDown,
+   $Mouse.position));
+   _elm.MouseSignals.values = {_op: _op
+                              ,showSignals: showSignals
+                              ,main: main};
+   return _elm.MouseSignals.values;
+};

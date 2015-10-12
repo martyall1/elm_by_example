@@ -1,0 +1,167 @@
+Elm.EyesModel = Elm.EyesModel || {};
+Elm.EyesModel.make = function (_elm) {
+   "use strict";
+   _elm.EyesModel = _elm.EyesModel || {};
+   if (_elm.EyesModel.values)
+   return _elm.EyesModel.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "EyesModel",
+   $Basics = Elm.Basics.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm);
+   var calculateP = F3(function (_v0,
+   _v1,
+   _v2) {
+      return function () {
+         switch (_v2.ctor)
+         {case "_Tuple2":
+            return function () {
+                 switch (_v1.ctor)
+                 {case "_Tuple2":
+                    return function () {
+                         switch (_v0.ctor)
+                         {case "_Tuple2":
+                            return function () {
+                                 var yB = _v0._0 * _v0._1 / $Basics.sqrt(Math.pow(_v0._0,
+                                 2) + Math.pow(_v0._1 * _v2._0 / _v2._1,
+                                 2));
+                                 var xB = _v0._0 * _v0._1 / $Basics.sqrt(Math.pow(_v0._1,
+                                 2) + Math.pow(_v0._0 * _v2._1 / _v2._0,
+                                 2));
+                                 var $ = _U.cmp(_v2._1 / _v2._0,
+                                 _v1._1 / _v1._0) < 0 ? {ctor: "_Tuple2"
+                                                        ,_0: _v1._0
+                                                        ,_1: _v1._0 * _v2._1 / _v2._0} : {ctor: "_Tuple2"
+                                                                                         ,_0: _v2._0 * _v1._1 / _v2._1
+                                                                                         ,_1: _v1._0},
+                                 xA = $._0,
+                                 yA = $._1;
+                                 var xP = xB * _v2._0 / xA;
+                                 var yP = yB * _v2._1 / yA;
+                                 return {ctor: "_Tuple2"
+                                        ,_0: xP
+                                        ,_1: yP};
+                              }();}
+                         _U.badCase($moduleName,
+                         "between lines 11 and 21");
+                      }();}
+                 _U.badCase($moduleName,
+                 "between lines 11 and 21");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 11 and 21");
+      }();
+   });
+   var pupilsCoordinates = F2(function (_v12,
+   _v13) {
+      return function () {
+         switch (_v13.ctor)
+         {case "_Tuple2":
+            return function () {
+                 switch (_v12.ctor)
+                 {case "_Tuple2":
+                    return function () {
+                         var sign = function (x) {
+                            return x / $Basics.abs(x);
+                         };
+                         var xM = $Basics.toFloat(_v13._0);
+                         var yC = $Basics.toFloat(_v12._1) / 2;
+                         var yM = $Basics.toFloat(_v12._1 - _v13._1) - yC;
+                         var yR = yC * 9 / 10;
+                         var xC = $Basics.toFloat(_v12._0) / 4;
+                         var xR = xC * 9 / 10;
+                         var $ = _U.cmp(xM,
+                         3 * xC) > -1 ? function (_v20) {
+                            return function () {
+                               switch (_v20.ctor)
+                               {case "_Tuple2":
+                                  return {ctor: "_Tuple2"
+                                         ,_0: _v20._0 + xC
+                                         ,_1: _v20._1 * sign(yM)};}
+                               _U.badCase($moduleName,
+                               "on line 37, column 33 to 52");
+                            }();
+                         }(A3(calculateP,
+                         {ctor: "_Tuple2",_0: xR,_1: yR},
+                         {ctor: "_Tuple2",_0: xC,_1: yC},
+                         {ctor: "_Tuple2"
+                         ,_0: xM - 3 * xC
+                         ,_1: yM})) : function (_v24) {
+                            return function () {
+                               switch (_v24.ctor)
+                               {case "_Tuple2":
+                                  return {ctor: "_Tuple2"
+                                         ,_0: xC - _v24._0
+                                         ,_1: _v24._1 * sign(yM)};}
+                               _U.badCase($moduleName,
+                               "on line 39, column 33 to 52");
+                            }();
+                         }(A3(calculateP,
+                         {ctor: "_Tuple2",_0: xR,_1: yR},
+                         {ctor: "_Tuple2"
+                         ,_0: 3 * xC
+                         ,_1: yC},
+                         {ctor: "_Tuple2"
+                         ,_0: 3 * xC - xM
+                         ,_1: yM})),
+                         xPr = $._0,
+                         yPr = $._1;
+                         var $ = _U.cmp(xM,
+                         xC) > -1 ? function (_v28) {
+                            return function () {
+                               switch (_v28.ctor)
+                               {case "_Tuple2":
+                                  return {ctor: "_Tuple2"
+                                         ,_0: _v28._0 - xC
+                                         ,_1: _v28._1 * sign(yM)};}
+                               _U.badCase($moduleName,
+                               "on line 43, column 32 to 51");
+                            }();
+                         }(A3(calculateP,
+                         {ctor: "_Tuple2",_0: xR,_1: yR},
+                         {ctor: "_Tuple2"
+                         ,_0: 3 * xC
+                         ,_1: yC},
+                         {ctor: "_Tuple2"
+                         ,_0: xM - xC
+                         ,_1: yM})) : function (_v32) {
+                            return function () {
+                               switch (_v32.ctor)
+                               {case "_Tuple2":
+                                  return {ctor: "_Tuple2"
+                                         ,_0: 0 - _v32._0 - xC
+                                         ,_1: _v32._1 * sign(yM)};}
+                               _U.badCase($moduleName,
+                               "on line 45, column 32 to 52");
+                            }();
+                         }(A3(calculateP,
+                         {ctor: "_Tuple2",_0: xR,_1: yR},
+                         {ctor: "_Tuple2",_0: xC,_1: yC},
+                         {ctor: "_Tuple2"
+                         ,_0: 0 - xM + xC
+                         ,_1: yM})),
+                         xPl = $._0,
+                         yPl = $._1;
+                         return {ctor: "_Tuple4"
+                                ,_0: xPl
+                                ,_1: yPl
+                                ,_2: xPr
+                                ,_3: yPr};
+                      }();}
+                 _U.badCase($moduleName,
+                 "between lines 27 and 47");
+              }();}
+         _U.badCase($moduleName,
+         "between lines 27 and 47");
+      }();
+   });
+   _elm.EyesModel.values = {_op: _op
+                           ,calculateP: calculateP
+                           ,pupilsCoordinates: pupilsCoordinates};
+   return _elm.EyesModel.values;
+};

@@ -1,0 +1,48 @@
+Elm.WindowSignals1 = Elm.WindowSignals1 || {};
+Elm.WindowSignals1.make = function (_elm) {
+   "use strict";
+   _elm.WindowSignals1 = _elm.WindowSignals1 || {};
+   if (_elm.WindowSignals1.values)
+   return _elm.WindowSignals1.values;
+   var _op = {},
+   _N = Elm.Native,
+   _U = _N.Utils.make(_elm),
+   _L = _N.List.make(_elm),
+   $moduleName = "WindowSignals1",
+   $Basics = Elm.Basics.make(_elm),
+   $Graphics$Element = Elm.Graphics.Element.make(_elm),
+   $List = Elm.List.make(_elm),
+   $Maybe = Elm.Maybe.make(_elm),
+   $Result = Elm.Result.make(_elm),
+   $Signal = Elm.Signal.make(_elm),
+   $Text = Elm.Text.make(_elm),
+   $Window = Elm.Window.make(_elm);
+   var showsignals = F3(function (a,
+   b,
+   c) {
+      return $Graphics$Element.flow($Graphics$Element.down)(A2($List.map,
+      function ($) {
+         return $Graphics$Element.leftAligned($Text.fromString($));
+      },
+      _L.fromArray([A2($Basics._op["++"],
+                   "Window.dimensions : ",
+                   $Basics.toString(a))
+                   ,A2($Basics._op["++"],
+                   "Window.width: ",
+                   $Basics.toString(b))
+                   ,A2($Basics._op["++"],
+                   "Window.height: ",
+                   $Basics.toString(c))])));
+   });
+   var main = A2($Signal._op["~"],
+   A2($Signal._op["~"],
+   A2($Signal._op["<~"],
+   showsignals,
+   $Window.dimensions),
+   $Window.width),
+   $Window.height);
+   _elm.WindowSignals1.values = {_op: _op
+                                ,showsignals: showsignals
+                                ,main: main};
+   return _elm.WindowSignals1.values;
+};
